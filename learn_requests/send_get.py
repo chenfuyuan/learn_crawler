@@ -32,3 +32,19 @@ print("type(response.content) = ",type(response.content))
 print("type(response.text) = ",type(response.text))
 #response.content.decode() type <str>
 print("type(response.content.decode()) = ",type(response.content.decode()))
+
+
+#response响应对象常用的属性
+print("================response响应对象常用的属性======================")
+#url
+print("response.url = ",response.url)
+#状态码
+print("状态码 response.status_code = ",response.status_code)
+#响应对应的请求头
+print("对应的请求头 response.request.headers = ",response.request.headers)
+#响应头
+print("响应头 response.headers = ",response.headers)
+#响应中携带的，需要设置的Cookie，返回cookieJar类型
+print("响应中携带的，需要设置的Cookie response.cookies = ",response.cookies)
+#响应对应请求中携带的Cookie，返回cookieJar类型
+print("响应对应请求中携带的Cookie response.request._cookies =",response.request._cookies)
