@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :send_request_cookies.py
+# @FileName  :request_cookies.py
 # @Time      :2021/10/18 8:59
 # @Author    :Chen
 

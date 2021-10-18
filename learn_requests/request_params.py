@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :send_request_params.py
+# @FileName  :request_params.py
 # @Time      :2021/10/18 7:56
 # @Author    :Chen
 

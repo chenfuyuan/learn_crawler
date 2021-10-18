@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :send_request_cookies_param.py
+# @FileName  :request_cookies_param.py
 # @Time      :2021/10/18 9:20
 # @Author    :Chen
 

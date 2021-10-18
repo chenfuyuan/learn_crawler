@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :send_get.py
+# @FileName  :request_get.py
 # @Time      :2021/10/18 6:47
 # @Author    :Chen
 
