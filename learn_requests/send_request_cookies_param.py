@@ -13,7 +13,7 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
 }
 
-cookie_str = "浏览器中抓取到的完整cookie信息";
+cookie_str = "浏览器中抓取到的完整cookie信息:name=value";
 
 '''
 cookies = {
@@ -22,10 +22,19 @@ cookies = {
 '''
 
 #将cookie字符串转化为cookies字典
-cookies = {cookie.split("=")[0]:cookie.split("=")[1] for cookie in cookie_str.split(";")}
+def cookie_str2dict(str):
+    #return {cookie.split("=")[0]:cookie.split("=")[1] for cookie in cookie_str.split(";")};
+    result = {};
+    for cookie in cookie_str.split(";"):
+        name,value = cookie.split("=");
+        result[name] =value;
+    return result;
 
+#将cookie字符串转化为cookies字典
+cookies_dict = cookie_str2dict(cookie_str)
+print("转化后的cookies = ", cookies_dict)
 #发起请求
-response = requests.get(url,headers=headers,cookies=cookies)
+response = requests.get(url, headers=headers, cookies=cookies_dict)
 
 #转化为str
 content = response.content.decode();
