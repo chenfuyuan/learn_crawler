@@ -20,16 +20,15 @@ def dataStr2dict(str):
         result[name.strip(" ")] = value.strip(" ")
     return result;
 
+
+#获取list的首个不是list的元素
+#如果list的首个元素是list类型数据，继续寻找首元素。
 def list_get_first(data):
-    if not isinstance(data, list):
-       raise ValueError("传入非列表数据")
-    while True:
-        if data:
-           data = data[0];
-        else:
-            raise ValueError("值为空")
-        if not isinstance(data, list):
-            return data;
+    if not data:
+        return None;
+    if isinstance(data, (list,tuple)):
+        return list_get_first(data[0])
+    return data
 
 
 class YouDao(object):
