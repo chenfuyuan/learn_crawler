@@ -35,9 +35,6 @@ class King(object):
         self.content = content;
         self.common_headers = self.get_common_headers();
         self.common_data = self.get_common_data();
-        self.proxy = {
-            "http": "117.114.149.66"
-        }
 
     def send_request(self, *, headers={}, data={}):
         if not headers:
@@ -48,7 +45,7 @@ class King(object):
         print("""request:
                 url:%s
                 headers:%s
-                data:%s""" % (King.url, headers, data))
+                data:%s""" % (__class__.url, headers, data))
 
         response = requests.post(King.url, headers=headers, data=data)
 
