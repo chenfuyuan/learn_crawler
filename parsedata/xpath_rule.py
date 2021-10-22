@@ -12,6 +12,7 @@ html_file = open("xpath_rule_html.html",'r',encoding='utf-8')
 html_text = html_file.read();
 
 #创建element对象
+#会纠正一些简单的语法错误，如缺失闭合标签
 html = etree.HTML(html_text)
 #print(html)
 #print(dir(html))
@@ -66,6 +67,11 @@ for el in el_list:
     #print(el.xpath('text()'))
     print(el.xpath('text()')[0],el.xpath('@href')[0])
 
+#将Element对象转化为bytes对象
+print("===============etree.toString()===================")
+html_toString = etree.tostring(html)
+print("etree.toString(html) = ",html_toString)
+print("type(html_toString)",type(html_toString))
 
 
 
