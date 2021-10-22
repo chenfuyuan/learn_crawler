@@ -14,7 +14,7 @@ class TieBa(object):
     def __init__(self, name):
         self.url = "https://tieba.baidu.com/f?kw={}&fr=index".format(name);
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
             #"User-Agent" : "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36"
         }
         self.page = 0;
@@ -41,9 +41,9 @@ class TieBa(object):
             data_list.append(temp);
         print("%s-%s"%(self.page,self.page+len(data_list)))
 
-        return not html.xpath('//a[@class="next pagination-item"]')
-
-
+        if html.xpath('//a[contains(@class,"next pagination-item")]'):
+            self.page += 50;
+            self.run();
 
     def run(self):
         # url
@@ -57,12 +57,9 @@ class TieBa(object):
 
 
         # 从响应中提取数据
-        isNext = self.parse_data(data)
-        if isNext and self.page < 500:
-            self.page+=50;
-            self.run();
+        self.parse_data(data)
 
 
 if __name__ == "__main__":
-    tieBa = TieBa("海贼王")
+    tieBa = TieBa("御剑江湖")
     tieBa.run()
