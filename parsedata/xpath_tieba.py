@@ -30,14 +30,16 @@ class TieBa(object):
         # 2. 替换掉注释标识，将标签进行释放
         data = data.decode().replace("<!--", " ").replace("-->", " ")
         html = etree.HTML(data);
-        #获取所有帖子项
-        el_list = html.xpath('//li[contains(@class,"j_thread_list")]')
+        #获取所有帖子标签
+        el_list = html.xpath('//li[contains(@class,"j_thread_list")]//a[@class="j_th_tit "]')
         #遍历帖子，进行数据组装 key = href ,value = text
-        title_dict = {}
+        data_list = [];
         for el in el_list:
-            a_title = el.xpath('.//a[@class="j_th_tit "]')[0];
-            title_dict[a_title.xpath("@href")[0]]=a_title.text
-        print("%s-%s"%(self.page,self.page+len(title_dict)))
+            temp = {};
+            temp["title"]=el.text;
+            temp["href"]="https://tieba.baidu.com/"+el.xpath("@href")[0];
+            data_list.append(temp);
+        print("%s-%s"%(self.page,self.page+len(data_list)))
 
         return not html.xpath('//a[@class="next pagination-item"]')
 
