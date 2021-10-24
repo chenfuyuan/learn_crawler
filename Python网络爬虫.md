@@ -957,17 +957,27 @@ for el in el_list:
 
 selenium是一个自动化测试框架。selenium运用在爬虫中，可以大幅降低爬虫的编写难度，但是也大幅降低爬虫的爬取速度。
 
-## 1. selenium必要插件安装
+> 安装
 
-### 1.1 chrome driver安装
+```
+pip install selenium
+```
 
-安装地址:[https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads)
+## driver 安装
 
-#### 1.1.1 安装
+### 1 chrome driver安装
+
+需要根据浏览器版本下载
+
+功能菜单->帮助->关于Chrome->版本
+
+下载地址:[https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads)
+
+#### 1.1 安装
 
 下载后解压，将``chromedriver.exe``添加到环境变量，或将其放在python安装位置的\script目录下。
 
-#### 1.1.2 验证
+#### 1.2 验证
 
 ```python
 from selenium import webdriver;
@@ -990,7 +1000,7 @@ print(driver.title)
 driver.quit()
 ```
 
-#### 1.1.3 无界面运行
+#### 1.3 无界面运行
 
 ```python
 '测试chrome driver 无界面'
@@ -1015,19 +1025,19 @@ driver.quit();
 
 
 
-### 1.2 PhantomJS(最新版本不再支持)
+### 2 PhantomJS(最新版本不再支持)
 
 一个基于Webkit的"无界面"浏览器。会把网站加载到内存中并执行页面上的javascript。
 
 最新的selenium不再支持PhantomJS。请使用ChromeDriver无界面版，
 
-### 1.2.1 安装
+### 2.1 安装
 
 下载地址:[https://phantomjs.org/download.html](https://phantomjs.org/download.html)
 
 下载完后，进行解压，并将/bin目录添加到环境变量PATH中。
 
-#### 1.2.2 验证
+#### 2.2 验证
 
 打开cmd输入``phantomjs -v ``，如果出现版本号，则代表安装成功
 
@@ -1053,4 +1063,55 @@ driver.quit()
 ```
 
 
+
+## selenium的作用和工作原理
+
+利用浏览器原生的API，封装程一套更面向对象的Selenium WebDriver API，直接操作浏览器页面里的元素，甚至操作浏览器本身（截屏、窗口大小、启动、关闭、安装插件、配置证书等)
+
+![image-20211024195118415](https://chenfuyuan-markdown-img.oss-cn-shenzhen.aliyuncs.com/20211024195120.png)
+
+- webdriver本质是一个web-server，对外提供webapi，其中封装了浏览器的各种功能
+- 不同浏览器使用各自不同的webdriver
+
+### 1. 简单使用
+
+```python
+from selenium import webdriver;
+import time;
+
+#executable_path="D:\production\python_install\chromedriver" 为chrmedriver的绝对路径
+#driver = webdriver.Chrome(executable_path="D:\production\python_install\chromedriver")
+
+#如果已经将chrome driver放入环境变量中则无需指定路径
+driver = webdriver.Chrome();
+driver.get("https://www.baidu.com")
+
+#寻找id为'kw'的元素，在其中输入'python'
+driver.find_element_by_id("kw").send_keys("python")
+#寻找id为'su'的元素，控制它进行点击
+driver.find_element_by_id("su").click();
+
+time.sleep(6)
+
+driver.quit();
+```
+
+- ``webdriver.Chrome(executable_path='D:\production\python_install\chromedriver')``中executable参数，指定chromedriver的绝对路径
+- ``driver.find_element_by_id(<str>'id值')``通过id属性值定义元素
+- ``.send_keys<str>"输入内容")``向该元素中输入内容
+- ``.click()``模拟浏览器点击，触发元素的click事件
+
+
+
+## selenium提取数据
+
+### 1. driver对象的常用属性和方法
+
+- ``driver.page_source``当前标签页浏览器渲染后的网页源码
+- ``driver.current_url``当前标签页的url
+- ``driver.close()``关闭当前标签页，如果只有一个标签页则关闭整个浏览器
+- ``driver.quit()``关闭浏览器
+- ``driver.forward()``页面前进
+- ``driver.back()``页面后退
+- ``driver.scrent_shot(<str>img_name)``页面截图
 
