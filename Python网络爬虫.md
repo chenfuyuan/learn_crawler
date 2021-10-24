@@ -953,3 +953,104 @@ for el in el_list:
 | @*     | 匹配任何属性节点。   |
 | node() | 匹配任何类型的节点。 |
 
+# selenium
+
+selenium是一个自动化测试框架。selenium运用在爬虫中，可以大幅降低爬虫的编写难度，但是也大幅降低爬虫的爬取速度。
+
+## 1. selenium必要插件安装
+
+### 1.1 chrome driver安装
+
+安装地址:[https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads)
+
+#### 1.1.1 安装
+
+下载后解压，将``chromedriver.exe``添加到环境变量，或将其放在python安装位置的\script目录下。
+
+#### 1.1.2 验证
+
+```python
+from selenium import webdriver;
+
+
+#如果driver没有添加到环境变量，需要将driver的绝对路径赋值给executable_path参数
+#driver = webdriver.Chrome(executable_path="")
+
+#如果driver添加到了环境变量或将driver放到了python安装路径的/script目录中，则不需要executable_path
+driver = webdriver.Chrome();
+
+
+#向一个url发送一个请求
+driver.get("https://www.baidu.com")
+
+print(driver.title)
+
+
+#推出模拟浏览器，一定要退出，不然会有残留进程
+driver.quit()
+```
+
+#### 1.1.3 无界面运行
+
+```python
+'测试chrome driver 无界面'
+from selenium import webdriver;
+from selenium.webdriver.chrome.options import Options;
+
+#设置chromedriver
+chrome_options = Options();
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+
+#获取一个driver
+driver = webdriver.Chrome(chrome_options=chrome_options)
+
+#发送一个url
+driver.get("https://www.baidu.com/")
+print(driver.title)
+
+#关闭
+driver.quit();
+```
+
+
+
+### 1.2 PhantomJS(最新版本不再支持)
+
+一个基于Webkit的"无界面"浏览器。会把网站加载到内存中并执行页面上的javascript。
+
+最新的selenium不再支持PhantomJS。请使用ChromeDriver无界面版，
+
+### 1.2.1 安装
+
+下载地址:[https://phantomjs.org/download.html](https://phantomjs.org/download.html)
+
+下载完后，进行解压，并将/bin目录添加到环境变量PATH中。
+
+#### 1.2.2 验证
+
+打开cmd输入``phantomjs -v ``，如果出现版本号，则代表安装成功
+
+```python
+from selenium import webdriver;
+
+
+#如果driver没有添加到环境变量，需要将driver的绝对路径赋值给executable_path参数
+#driver = webdriver.Chrome(executable_path="")
+
+#如果driver添加到了环境变量或将driver放到了python安装路径的/script目录中，则不需要executable_path
+driver = webdriver.PhantomJS();
+
+
+#向一个url发送一个请求
+driver.get("https://www.baidu.com")
+
+print(driver.title)
+
+
+#推出模拟浏览器，一定要退出，不然会有残留进程
+driver.quit()
+```
+
+
+
