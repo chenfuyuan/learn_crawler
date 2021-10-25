@@ -1115,3 +1115,14 @@ driver.quit();
 - ``driver.back()``页面后退
 - ``driver.scrent_shot(<str>img_name)``页面截图
 
+### 2. driver对象定位标签元素获取标签对象方法
+
+- **``find_element_by_id()``**根据id
+- **``find_element_by_class_name()``**根据类名
+- **``find_element_by_name()``**根据标签``name属性值``
+- **``find_element_by_xpath()``**根据xpath语法
+- ``find_element_by_link_text()``根据连接文本
+- ``find_element_by_partial_link_text()``根据链接包含的文本
+- ``find_element_by_tag_name()``根据标签名
+- **``find_element_by_css()``**根据css选择器
+
