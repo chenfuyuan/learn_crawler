@@ -1103,7 +1103,7 @@ driver.quit();
 
 
 
-## selenium提取数据
+## selenium使用
 
 ### 1. driver对象的常用属性和方法
 
@@ -1125,4 +1125,45 @@ driver.quit();
 - ``find_element_by_partial_link_text()``根据链接包含的文本
 - ``find_element_by_tag_name()``根据标签名
 - **``find_element_by_css()``**根据css选择器
+
+### 3. 标签切换
+
+```python
+'selenium 切换标签'
+
+from selenium import webdriver;
+import time;
+
+driver =webdriver.Chrome();
+
+url = "https://www.baidu.com";
+
+driver.get(url)
+
+#点击hao123链接会打开一个新标签页
+driver.find_element_by_link_text("hao123").click();
+
+print("当前url:",driver.current_url)
+
+#进行标签切换
+#1. 获取当前所有标签页句柄构成的列表
+current_windows  = driver.window_handles
+print("current_windows",current_windows)
+#2. 切换标签
+driver.switch_to.window(current_windows[1])
+print("切换后的url:",driver.current_url)
+
+time.sleep(3)
+driver.close();
+time.sleep(3)
+driver.quit();
+```
+
+1. 获取当前所有标签页句柄
+
+   ``driver.window_handles``返回所有标签页组成的句柄 列表
+
+2. 根据句柄切换标签页
+
+   ``driver.switch_to.window(<CDwindow对象>)``
 
