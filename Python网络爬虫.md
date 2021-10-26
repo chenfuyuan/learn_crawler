@@ -1390,3 +1390,27 @@ print(driver.title)
 driver.quit();
 ```
 
+### 9. 使用代理
+
+```python
+'使用代理'
+from selenium import webdriver;
+options = webdriver.ChromeOptions();
+
+#添加ip代理配置 --proxy-server
+#更换ip代理，必须重启浏览器
+options.add_argument("--proxy-server=http://117.114.149.66:55443")
+
+driver = webdriver.Chrome(chrome_options=options)
+
+url ="https://www.baidu.com"
+
+driver.get(url)
+
+print(driver.title)
+
+driver.quit();
+```
+
+``--proxy-server``属性，用于配置代理。
+
