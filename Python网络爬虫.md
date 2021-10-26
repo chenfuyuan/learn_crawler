@@ -1250,3 +1250,33 @@ driver.quit();
   - ``driver.delete_cookie("cookie_name")``删除指定名称的cookie
   - ``driver.delete_all_cookies()``删除所有cookie
 
+### 6. 执行js代码
+
+```python
+'selenium 执行js代码'
+from selenium import webdriver;
+import time;
+
+url="https://xm.lianjia.com/"
+driver = webdriver.Chrome();
+
+driver.get(url)
+
+#将浏览器最大化
+driver.maximize_window();
+#滚动条拖动
+js ='scrollTo(1000,1000)'
+#执行js
+driver.execute_script(js)
+
+time.sleep(3)
+
+#如果页面中看不到该元素时，会报查询不到该元素错误
+#通过拖动浏览器滚动条和放大浏览器等操作，使元素可见
+driver.find_element_by_xpath('//*[@id="ershoufanglist"]/div/div[1]/p/a').click();
+```
+
+- 使用``driver.maximize_window()``放大浏览器窗口
+- 使用``scrollTo(x,y)``js方法，对浏览器滚动条进行操作。
+  - x,y代表滚动多少个像素
+- 使用``driver.execute_script(js)``执行js脚本语句
