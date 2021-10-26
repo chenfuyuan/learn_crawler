@@ -1351,5 +1351,42 @@ print(el)
   #每0.5秒检查一次(通过链接文本内容定位标签是否存在)，如果存在就继续向下执行语句，如果不存在，直到20秒后，报TimeoutException(message, screen, stacktrace)
   ```
 
-  
+### 8. 开启无界面模式
+
+- 实例化配置对象
+  - ``options = webdriver.ChromeOptions();``
+- 添加无界面模式的配置
+  - ``options.add_argument("--headless")``
+- 添加禁用gpu配置
+  - ``options.add_argument("--disable-gpu")``
+- 根据配置实例化``driver``对象
+  - ``driver = webdriver.Chrome(chrome_options=options)``
+
+注意:
+
+- macos中chrome浏览器59+版本，Linux中57+版本才能使用无界面模式
+
+参考代码:
+
+```python
+'selenium无界面模式配置'
+from selenium import webdriver;
+
+#实例化配置对象
+options = webdriver.ChromeOptions();
+#添加无界面配置
+options.add_argument("--headless")
+#添加禁用gpu
+options.add_argument("--disable-gpu")
+#实例化driver
+driver = webdriver.Chrome(chrome_options=options)
+
+url = "https://www.baidu.com"
+
+driver.get(url)
+
+print(driver.title)
+
+driver.quit();
+```
 
