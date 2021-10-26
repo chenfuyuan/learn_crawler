@@ -1280,3 +1280,76 @@ driver.find_element_by_xpath('//*[@id="ershoufanglist"]/div/div[1]/p/a').click()
 - 使用``scrollTo(x,y)``js方法，对浏览器滚动条进行操作。
   - x,y代表滚动多少个像素
 - 使用``driver.execute_script(js)``执行js脚本语句
+
+### 7. 页面等待
+
+分类
+
+1. 强制等待
+2. 隐式等待
+3. 显式等待
+
+#### 7.1 强制等待
+
+- 其实就是``time.sleep(<int>)``
+- 缺点是不智能，设置的过短，元素未加载处理。设置太长，则浪费时间
+
+#### 7.2 隐式等待
+
+- 针对的是元素定位，饮食等待设置了一个时间，在一段时间内判断元素是否定位成功，如果完成了就进行下一步
+- 在设置的时间内没有定位成功，报超时加载
+- 示例代码
+
+```python
+'测试 selenium的页面等待'
+from selenium import webdriver;
+import time;
+
+url = "https://www.baidu.com"
+driver = webdriver.Chrome()
+
+#隐式等待
+#设置之后的所有元素定位操作都有最大等待时间十秒，在十秒内会定期进行元素定位，超过设置十秒会报元素定位失败错误
+driver.implicitly_wait(3);
+
+driver.get(url);
+
+el = driver.find_element_by_xpath('//*[@id="lg"]/img[1000]')
+
+print(el)
+```
+
+使用``driver.implicitly_wait(<int>10);``设置之后的所有元素定位操作都有最大等待时间十秒，在十秒内会定期进行元素定位，超过设置十秒会报元素定位失败错误
+
+#### 7.3 显式等待
+
+- 每经过多少秒就查看一次等待条件是否达到，如果达成就停止等待，继续执行后续代码
+
+- 如果没有达成就继续等待知道超过规定时间后，按超时异常
+
+- 示例代码
+
+  ```python
+  'selenium 显式等待'
+  from selenium import webdriver;
+  from selenium.webdriver.support.wait import WebDriverWait;
+  from selenium.webdriver.support import  expected_conditions as EC
+  from selenium.webdriver.common.by import By
+  
+  url = "https://www.baidu.com"
+  
+  driver = webdriver.Chrome();
+  
+  driver.get(url);
+  
+  WebDriverWait(driver,20,0.5).until(EC.presence_of_element_located((By.LINK_TEXT,"好123")))
+  
+  #参数20表示最长等待20秒
+  #参数0.5表示0.5秒检查一次规定的标签是否存在
+  #EC.presence_of_element_located((By.LINK_TEXT,"好123"))表示通过链接文本内容定位元素
+  #EC.presence_of_element_located()只接收一个参数，所以需要用括号把2个参数括起来。形成一个tuple对象
+  #每0.5秒检查一次(通过链接文本内容定位标签是否存在)，如果存在就继续向下执行语句，如果不存在，直到20秒后，报TimeoutException(message, screen, stacktrace)
+  ```
+
+  
+

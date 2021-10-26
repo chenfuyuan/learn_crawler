@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :selenium_write.py
+# @FileName  :selenium_implicit_write.py
 # @Time      :2021/10/26 16:54
 # @Author    :Chen
 
