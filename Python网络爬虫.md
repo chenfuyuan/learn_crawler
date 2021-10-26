@@ -1414,3 +1414,24 @@ driver.quit();
 
 ``--proxy-server``属性，用于配置代理。
 
+### 9. 替换``user-agent``
+
+```python
+from selenium import webdriver;
+options = webdriver.ChromeOptions();
+
+
+options.add_argument("--user-agent=Mozilia/5.0 selenium")
+
+driver = webdriver.Chrome(chrome_options=options)
+
+url ="https://www.baidu.com"
+
+driver.get(url)
+
+print(driver.title)
+
+```
+
+``--user-agent``属性对应user-Agent
+
